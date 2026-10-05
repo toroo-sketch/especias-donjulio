@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Cualquiera que tenga el link de la página puede ver y cargar datos
+    // en estas tres colecciones. Nada más de la base queda abierto.
+    match /{coleccion}/{id} {
+      allow read, write: if coleccion in ['productos', 'movimientos', 'cierres'];
+    }
+  }
+}
